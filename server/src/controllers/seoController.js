@@ -6,7 +6,7 @@ import { getSettings } from '../models/AdminSettings.js';
 import { asyncHandler, escapeHtml } from '../utils/helpers.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DIST = path.resolve(__dirname, '../../../client/dist');
+const DIST = path.resolve(__dirname, '../../../public');
 const site = () => (process.env.SITE_URL || 'http://localhost:5173').replace(/\/$/, '');
 const abs = (u) => (!u ? '' : /^https?:/.test(u) ? u : `${site()}${u.startsWith('/') ? '' : '/'}${u}`);
 
