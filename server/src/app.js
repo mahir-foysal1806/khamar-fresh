@@ -30,7 +30,7 @@ export function createApp() {
   // Production: serve the built React app with per-page Open Graph tags
   if (hasClientBuild()) {
     app.use(express.static(clientDist(), { index: false, maxAge: '7d' }));
-    app.get('*', spaPage);
+    app.get('/{*splat}', spaPage);
   }
 
   app.use(notFound);
