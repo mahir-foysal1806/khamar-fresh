@@ -110,7 +110,7 @@ function Header() {
       {open && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div className="absolute inset-0 bg-black/40" onClick={() => setOpen(false)} />
-          <aside className="absolute left-0 top-0 flex h-full w-72 max-w-[85%] animate-rise flex-col bg-white p-4 shadow-xl">
+          <aside className="absolute left-0 top-0 flex h-full max-h-[100dvh] w-72 max-w-[85%] flex-col overflow-y-auto overscroll-contain bg-white p-4 shadow-xl">
             <div className="mb-4 flex items-center justify-between">
               <Logo />
               <button onClick={() => setOpen(false)} className="rounded-lg p-2 hover:bg-earth-50" aria-label="Close menu"><X size={20} /></button>
@@ -227,7 +227,7 @@ function FloatingChat() {
   const ms = contact.messengerUsername && `https://m.me/${contact.messengerUsername}`;
   if (!wa && !ms) return null;
   return (
-    <div className="fixed bottom-20 right-3 z-30 flex flex-col gap-2.5 md:bottom-6 md:right-5">
+    <div className="fixed bottom-[calc(5rem+env(safe-area-inset-bottom))] right-3 z-30 flex flex-col gap-2.5 md:bottom-6 md:right-5">
       {ms && (
         <a href={ms} target="_blank" rel="noreferrer" aria-label="Chat on Messenger" className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-[#00B2FF] to-[#006AFF] text-white shadow-lift transition hover:scale-110">
           <MessagesSquare size={22} />
@@ -248,7 +248,7 @@ function BottomNav() {
   const phone = settings.contact.phones?.[0];
   const item = ({ isActive }) => `relative flex flex-1 flex-col items-center gap-0.5 py-2 text-[11px] font-semibold ${isActive ? 'text-leaf-700' : 'text-earth-500'}`;
   return (
-    <nav className="safe-bottom fixed inset-x-0 bottom-0 z-40 flex border-t border-earth-100 bg-white/95 backdrop-blur md:hidden" aria-label="Quick navigation">
+    <nav className="safe-bottom fixed inset-x-0 bottom-0 z-40 flex min-h-16 border-t border-earth-100 bg-white/95 pb-[env(safe-area-inset-bottom)] shadow-[0_-4px_16px_rgba(0,0,0,0.04)] backdrop-blur md:hidden" aria-label="Quick navigation">
       <NavLink to="/" end className={item}><Home size={20} />Home</NavLink>
       <NavLink to="/shop" className={item}><Store size={20} />Shop</NavLink>
       <NavLink to="/cart" className={item}>
@@ -266,7 +266,7 @@ export default function Layout() {
     <div className="flex min-h-screen flex-col">
       <AnnouncementBar />
       <Header />
-      <main className="flex-1 pb-16 md:pb-0">
+      <main className="min-w-0 flex-1 pb-20 md:pb-0">
         <Outlet />
       </main>
       <Footer />

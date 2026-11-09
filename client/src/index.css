@@ -3,26 +3,122 @@
 @tailwind utilities;
 
 @layer base {
-  html { -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; }
-  body { @apply bg-cream font-sans text-earth-900 antialiased; }
-  h1, h2, h3 { @apply font-display; }
-  input, select, textarea { font-size: 16px; } /* prevents iOS zoom */
+  html {
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-cream font-sans text-earth-900 antialiased;
+    min-width: 320px;
+    overflow-x: clip;
+  }
+
+  h1, h2, h3 {
+    @apply font-display;
+  }
+
+  input, select, textarea, button {
+    font: inherit;
+  }
+
+  input, select, textarea {
+    font-size: 16px;
+  }
+
+  button, a {
+    touch-action: manipulation;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  :focus-visible {
+    outline: 3px solid #84a98c;
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: #d8e8ce;
+    color: #244b35;
+  }
 }
 
 @layer components {
-  .container-x { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8; }
-  .btn { @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-50; }
-  .btn-primary { @apply btn bg-leaf-600 text-white shadow-soft hover:bg-leaf-700; }
-  .btn-honey { @apply btn bg-honey-400 text-earth-900 shadow-soft hover:bg-honey-500; }
-  .btn-outline { @apply btn border border-leaf-600 text-leaf-700 hover:bg-leaf-50; }
-  .btn-ghost { @apply btn text-earth-700 hover:bg-earth-100; }
-  .btn-danger { @apply btn bg-red-600 text-white hover:bg-red-700; }
-  .card { @apply rounded-2xl border border-earth-100 bg-white shadow-soft; }
-  .input { @apply w-full rounded-xl border border-earth-200 bg-white px-3.5 py-2.5 text-earth-900 placeholder:text-earth-300 focus:border-leaf-500 focus:outline-none focus:ring-2 focus:ring-leaf-200; }
-  .label { @apply mb-1 block text-sm font-medium text-earth-700; }
-  .chip { @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold leading-5; }
-  .no-scrollbar { scrollbar-width: none; }
-  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition duration-200 active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply btn bg-leaf-600 text-white shadow-soft hover:bg-leaf-700;
+  }
+
+  .btn-honey {
+    @apply btn bg-honey-400 text-earth-900 shadow-soft hover:bg-honey-500;
+  }
+
+  .btn-outline {
+    @apply btn border border-leaf-600 text-leaf-700 hover:bg-leaf-50;
+  }
+
+  .btn-ghost {
+    @apply btn text-earth-700 hover:bg-earth-100;
+  }
+
+  .btn-danger {
+    @apply btn bg-red-600 text-white hover:bg-red-700;
+  }
+
+  .card {
+    @apply rounded-2xl border border-earth-100 bg-white shadow-soft;
+  }
+
+  .input {
+    @apply w-full min-w-0 rounded-xl border border-earth-200 bg-white px-3.5 py-3 text-earth-900 placeholder:text-earth-300 focus:border-leaf-500 focus:outline-none focus:ring-2 focus:ring-leaf-200;
+  }
+
+  .label {
+    @apply mb-1 block text-sm font-medium text-earth-700;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold leading-5;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 }
 
-.safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@media (max-width: 380px) {
+  .container-x {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
